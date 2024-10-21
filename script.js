@@ -147,12 +147,25 @@ infoContainer.addEventListener('click', function() {
         modalDescription.innerHTML = detailedInfo[language].description;
         modalIcon.src = detailedInfo[language].logo;
 
-        fullscreenModal.style.display = "block";
+        fullscreenModal.style.display = "block";  // Открытие модального окна
     } else {
         console.error("No icon is selected. Please select an icon first.");
     }
 });
 
+// Добавим также обработчик клика на сам контент для открытия модалки
+infoContent.addEventListener('click', function() {
+    const selectedIcon = Array.from(icons).find(icon => icon.classList.contains('selected'));
+
+    if (selectedIcon) {
+        const language = selectedIcon.getAttribute('data-lang');
+        modalTitle.innerHTML = language;
+        modalDescription.innerHTML = detailedInfo[language].description;
+        modalIcon.src = detailedInfo[language].logo;
+
+        fullscreenModal.style.display = "block";  // Открытие модального окна
+    }
+});
 
 closeModalBtn.addEventListener('click', function() {
     fullscreenModal.style.display = "none";
