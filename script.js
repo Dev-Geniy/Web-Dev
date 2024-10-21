@@ -153,7 +153,6 @@ infoContainer.addEventListener('click', function() {
     }
 });
 
-// Добавим также обработчик клика на сам контент для открытия модалки
 infoContent.addEventListener('click', function() {
     const selectedIcon = Array.from(icons).find(icon => icon.classList.contains('selected'));
 
@@ -164,8 +163,11 @@ infoContent.addEventListener('click', function() {
         modalIcon.src = detailedInfo[language].logo;
 
         fullscreenModal.style.display = "block";  // Открытие модального окна
+    } else {
+        console.error("No icon is selected. Please select an icon first.");
     }
 });
+
 
 closeModalBtn.addEventListener('click', function() {
     fullscreenModal.style.display = "none";
