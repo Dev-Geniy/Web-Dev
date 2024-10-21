@@ -44,10 +44,8 @@ const infoData = {
 icons.forEach(icon => {
     icon.addEventListener('click', function() {
        
-        icons.forEach(i => i.classList.remove('active', 'selected', 'pink', 'purple', 'orange'));
-
+        icons.forEach(i => i.classList.remove('active', 'selected', 'pink', 'purple', 'orange', 'blue', 'green', 'yellow', 'red', 'cyan', 'magenta'));
         this.classList.add('active');
-
         
         const colors = ['pink', 'purple', 'orange'];
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
