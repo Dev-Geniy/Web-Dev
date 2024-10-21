@@ -141,14 +141,20 @@ const detailedInfo = {
 };
 
 infoContainer.addEventListener('click', function() {
-    const language = icons[Array.from(icons).findIndex(icon => icon.classList.contains('selected'))].getAttribute('data-lang');
+    const selectedIcon = Array.from(icons).find(icon => icon.classList.contains('selected'));
 
-    modalTitle.innerHTML = language;
-    modalDescription.innerHTML = detailedInfo[language].description;
-    modalIcon.src = detailedInfo[language].logo;
+    if (selectedIcon) {
+        const language = selectedIcon.getAttribute('data-lang');
+        modalTitle.innerHTML = language;
+        modalDescription.innerHTML = detailedInfo[language].description;
+        modalIcon.src = detailedInfo[language].logo;
 
-    fullscreenModal.style.display = "block";
+        fullscreenModal.style.display = "block";
+    } else {
+        console.error("No icon is selected. Please select an icon first.");
+    }
 });
+
 
 closeModalBtn.addEventListener('click', function() {
     fullscreenModal.style.display = "none";
