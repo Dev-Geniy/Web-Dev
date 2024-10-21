@@ -214,3 +214,7 @@ body {
 .info-container.active .arrow {
     opacity: 1;
 }
+
+.info-container {
+    cursor: pointer;
+}
