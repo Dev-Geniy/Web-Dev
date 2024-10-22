@@ -143,34 +143,62 @@ body {
     border-radius: 0;
 }
 
+/* Стили для модального окна */
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8); /* Полупрозрачный черный фон */
+}
+
+/* Контент модального окна */
 .modal-content {
-    background-color: rgba(255, 255, 255, 0.7);
-    margin: 20px;
+    background-color: #fefefe;
+    margin: 10% auto;
     padding: 20px;
-    border: none;
-    border-radius: 15px;
-    color: black;
-    box-shadow: 0 0 20px #00FFCC;
-    height: calc(100% - 40px);
-    overflow-y: auto;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
 }
 
-.modal-icon {
+
+/* Стили для текста в модальном окне */
+.modal h2 {
+    margin: 10px 0;
+}
+
+.modal p {
+    text-align: left;
+}
+
+/* Логотип в модальном окне */
+.modal-logo {
     width: 100px;
-    margin: 0 auto;
-    display: block;
+    height: auto;
+    margin-bottom: 20px;
 }
 
-.close-btn {
+/* Кнопка закрытия модального окна */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
     color: #aaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
+    cursor: pointer;
 }
 
-.close-btn:hover,
-.close-btn:focus {
-    color: black;
+.close:hover,
+.close:focus {
+    color: #000;
     text-decoration: none;
     cursor: pointer;
 }
