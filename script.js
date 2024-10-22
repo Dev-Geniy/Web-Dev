@@ -6,7 +6,7 @@ const backgrounds = [
     'https://iili.io/23jcBp4.jpg', 
     'https://iili.io/23jiAve.jpg', 
     'https://iili.io/23jcM6F.md.jpg',
-    'https://iili.io/23w22Fn.jpg', 
+    'https://iili.io/23w22Fn.jpg',
     'https://iili.io/23jcW3g.jpg', 
     'https://iili.io/23jVvOg.jpg',
     'https://iili.io/23jc34n.jpg'
@@ -44,8 +44,10 @@ const infoData = {
 icons.forEach(icon => {
     icon.addEventListener('click', function() {
        
-        icons.forEach(i => i.classList.remove('active', 'selected', 'pink', 'purple', 'orange', 'blue', 'green', 'yellow', 'red', 'cyan', 'magenta'));
+        icons.forEach(i => i.classList.remove('active', 'selected', 'pink', 'purple', 'orange'));
+
         this.classList.add('active');
+
         
         const colors = ['pink', 'purple', 'orange'];
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
@@ -139,20 +141,41 @@ const detailedInfo = {
 };
 
 infoContainer.addEventListener('click', function() {
-    const selectedIcon = Array.from(icons).find(icon => icon.classList.contains('selected'));
+    const language = icons[Array.from(icons).findIndex(icon => icon.classList.contains('selected'))].getAttribute('data-lang');
 
-    if (selectedIcon) {
-        const language = selectedIcon.getAttribute('data-lang');
-        modalTitle.innerHTML = language;
-        modalDescription.innerHTML = detailedInfo[language].description;
-        modalIcon.src = detailedInfo[language].logo;
+    modalTitle.innerHTML = language;
+    modalDescription.innerHTML = detailedInfo[language].description;
+    modalIcon.src = detailedInfo[language].logo;
 
-        fullscreenModal.style.display = "block";  // Открытие модального окна
-    } else {
-        console.error("No icon is selected. Please select an icon first.");
+    fullscreenModal.style.display = "block";
+});
+
+closeModalBtn.addEventListener('click', function() {
+    fullscreenModal.style.display = "none";
+});
+
+window.addEventListener('click', function(event) {
+    if (event.target == fullscreenModal) {
+        fullscreenModal.style.display = "none";
     }
 });
 
+icons.forEach(icon => {
+    icon.addEventListener('click', function() {
+        icons.forEach(i => i.classList.remove('active', 'selected', 'pink', 'purple', 'orange'));
+        this.classList.add('active');
+
+        const colors = ['pink', 'purple', 'orange'];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        this.classList.add('selected', randomColor);
+
+        const language = this.getAttribute('data-lang');
+        infoContent.innerHTML = infoData[language];
+        infoContainer.classList.add('active');
+    });
+});
+
+// Открытие модального окна при клике на контент (добавленный код)
 infoContent.addEventListener('click', function() {
     const selectedIcon = Array.from(icons).find(icon => icon.classList.contains('selected'));
 
@@ -168,36 +191,12 @@ infoContent.addEventListener('click', function() {
     }
 });
 
-
+// Закрытие модального окна
 closeModalBtn.addEventListener('click', function() {
     fullscreenModal.style.display = "none";
 });
-
 window.addEventListener('click', function(event) {
     if (event.target == fullscreenModal) {
         fullscreenModal.style.display = "none";
     }
-});
-
-icons.forEach(icon => {
-    icon.addEventListener('click', function() {
-        icons.forEach(i => i.classList.remove('active', 'selected', 'pink', 'purple', 'orange'));
-
-        this.classList.add('active');
-
-        const colors = ['pink', 'purple', 'orange'];
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        this.classList.add('selected', randomColor);
-
-        const language = this.getAttribute('data-lang');
-        infoContent.innerHTML = infoData[language];
-        infoContainer.classList.add('active');
-
-        const arrow = document.getElementById('arrow');
-        arrow.style.opacity = '1';
-
-        setTimeout(() => {
-            this.classList.remove('active');
-        }, 1000);
-    });
 });
